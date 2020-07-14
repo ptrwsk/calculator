@@ -1,0 +1,28 @@
+body {
+    display: flex;
+    flex-direction: column;
+}
+.calculator {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    border: 1px solid gray;
+    padding: 10px;
+}
+.display {
+    border: 1px solid gray;
+    padding: 5px;
+
+}
+.middle {
+    display: flex;
+    flex-direction: row;
+}
+.num-keyboard {
+    display: flex;
+    flex-direction: column ;
+}
+.functions {
+    display: flex;
+    flex-direction: column;
+}
