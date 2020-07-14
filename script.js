@@ -111,11 +111,15 @@ by.addEventListener("click", function (e) {
   calculate("/");
 });
 
+let operator = undefined;
+
 function calculate(sign) {
+  if (operator !== undefined) {
+    itEquals();
+  }
   first = displayValue;
-  displayValue = "";
+  displayValue = 0;
   operator = sign;
-  display.textContent = displayValue;
 }
 
 equal.addEventListener("click", function (e) {
