@@ -41,12 +41,13 @@ const plus = document.querySelector("#add");
 const minus = document.querySelector("#substract");
 const times = document.querySelector("#multiply");
 const by = document.querySelector("#divide");
+const decimals = document.querySelector("#decimals");
 const equal = document.querySelector("#equal");
 
 const display = document.querySelector(".display");
 
 let displayValue = 0;
-display.textContent = displayValue;
+updateDisplayTexcontent()
 
 one.addEventListener("click", function (e) {
   changeDisplay(1);
@@ -81,22 +82,58 @@ zero.addEventListener("click", function (e) {
 
 clear.addEventListener("click", function (e) {
   displayValue = 0;
-  display.textContent = displayValue;
+  updateDisplayTexcontent()
 });
-
+function updateDisplayTexcontent() {
+    // if(displayValue.length > 19){
+    //     return  
+    // } else {
+        display.textContent = displayValue;
+    // }
+}
+function roundUp(){
+    if(displayValue.length > 19){
+        
+    }
+}
 function changeDisplay(number) {
   if (displayValue == 0) {
     displayValue = number;
-  } else {
+  } else if(displayValue.length >= 19){
+      return
+  }else {
     displayValue = displayValue + `${number}`;
   }
-  display.textContent = displayValue;
+  updateDisplayTexcontent()
 }
 window.addEventListener("keydown", function (e) {
   if (`${e.keyCode}` >= 28 && `${e.keyCode}` <= 57) {
     changeDisplay(`${e.key}`);
+  } else if (`${e.keyCode}` == 67){
+    displayValue = 0;
+    updateDisplayTexcontent()
+  } else if (`${e.keyCode}` == 8) {
+      doBackspace()
   }
 });
+
+backspace.addEventListener("click", doBackspace)
+function doBackspace(){
+    displayValueArray =  Array.from(displayValue)
+   if (displayValueArray.length <= 1 ){
+        displayValue = 0
+   } else {
+    //    if(displayValue.length >= 19){
+    //     displayValueArray = displayValueArray.slice(0,20)
+    //    }
+       displayValueArray.pop()
+       displayValue = ""
+       for(i=0;i<displayValueArray.length; i++){
+          displayValue = displayValue + parseInt(displayValueArray[i])
+       }
+}
+   updateDisplayTexcontent()
+}
 
 plus.addEventListener("click", function (e) {
   calculate("+");
@@ -134,8 +171,12 @@ function itEquals() {
       operator,
       parseInt(displayValue)
     )}`;
-    display.textContent = displayValue;
+    updateDisplayTexcontent()
     first = undefined;
     operator = undefined;
   }
 }
+
+decimals.addEventListener("click", function(e){
+   
+})
