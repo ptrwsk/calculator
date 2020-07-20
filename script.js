@@ -1,5 +1,5 @@
 function add(first, second) {
-  return first + second;
+  return Math.round(first + second);
 }
 function subtract(first, second) {
   return first - second;
@@ -47,7 +47,7 @@ const equal = document.querySelector("#equal");
 const display = document.querySelector(".display");
 
 let displayValue = 0;
-updateDisplayTexcontent()
+updateDisplayTexcontent();
 
 one.addEventListener("click", function (e) {
   changeDisplay(1);
@@ -82,57 +82,55 @@ zero.addEventListener("click", function (e) {
 
 clear.addEventListener("click", function (e) {
   displayValue = 0;
-  updateDisplayTexcontent()
+  updateDisplayTexcontent();
 });
 function updateDisplayTexcontent() {
-    // if(displayValue.length > 19){
-    //     return  
-    // } else {
-        display.textContent = displayValue;
-    // }
+  displayValue = roundUp(displayValue);
+  display.textContent = displayValue;
 }
-function roundUp(){
-    if(displayValue.length > 19){
-        
-    }
+
+function roundUp(number) {
+  return (number =
+    Math.round((parseFloat(number) + Number.EPSILON) * 10000000) / 10000000);
 }
+
 function changeDisplay(number) {
   if (displayValue == 0) {
     displayValue = number;
-  } else if(displayValue.length >= 19){
-      return
-  }else {
+  } else if (displayValue.length >= 14) {
+    return;
+  } else {
     displayValue = displayValue + `${number}`;
   }
-  updateDisplayTexcontent()
+  updateDisplayTexcontent();
 }
 window.addEventListener("keydown", function (e) {
   if (`${e.keyCode}` >= 28 && `${e.keyCode}` <= 57) {
     changeDisplay(`${e.key}`);
-  } else if (`${e.keyCode}` == 67){
+  } else if (`${e.keyCode}` == 67) {
     displayValue = 0;
-    updateDisplayTexcontent()
+    updateDisplayTexcontent();
   } else if (`${e.keyCode}` == 8) {
-      doBackspace()
+    doBackspace();
   }
 });
 
-backspace.addEventListener("click", doBackspace)
-function doBackspace(){
-    displayValueArray =  Array.from(displayValue)
-   if (displayValueArray.length <= 1 ){
-        displayValue = 0
-   } else {
-    //    if(displayValue.length >= 19){
-    //     displayValueArray = displayValueArray.slice(0,20)
-    //    }
-       displayValueArray.pop()
-       displayValue = ""
-       for(i=0;i<displayValueArray.length; i++){
-          displayValue = displayValue + parseInt(displayValueArray[i])
-       }
-}
-   updateDisplayTexcontent()
+backspace.addEventListener("click", doBackspace);
+function doBackspace() {
+  console.log(typeof displayValue);
+  displayValue = displayValue.toString();
+  displayValueArray = Array.from(displayValue);
+  console.log(displayValueArray);
+  if (displayValueArray.length <= 1) {
+    displayValue = 0;
+  } else {
+    displayValueArray.pop();
+    displayValue = "";
+    for (i = 0; i < displayValueArray.length; i++) {
+      displayValue = displayValue + parseInt(displayValueArray[i]);
+    }
+  }
+  updateDisplayTexcontent();
 }
 
 plus.addEventListener("click", function (e) {
@@ -171,12 +169,10 @@ function itEquals() {
       operator,
       parseInt(displayValue)
     )}`;
-    updateDisplayTexcontent()
+    updateDisplayTexcontent();
     first = undefined;
     operator = undefined;
   }
 }
 
-decimals.addEventListener("click", function(e){
-   
-})
+decimals.addEventListener("click", function (e) {});
