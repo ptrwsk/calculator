@@ -1,5 +1,5 @@
 function add(first, second) {
-  return Math.round(first + second);
+  return first + second;
 }
 function subtract(first, second) {
   return first - second;
@@ -9,7 +9,7 @@ function multiply(first, second) {
 }
 function divide(first, second) {
   if (second == 0) {
-    return "Can't devide by zero";
+    return "Can't devide by 0";
   } else {
     return first / second;
   }
@@ -82,24 +82,34 @@ zero.addEventListener("click", function (e) {
 
 clear.addEventListener("click", function (e) {
   displayValue = 0;
+  display.classList.remove("smaller")
   updateDisplayTexcontent();
 });
 function updateDisplayTexcontent() {
-  displayValue = roundUp(displayValue);
+  if(displayValue.toString().match("[a-zA-Z]+") || !displayValue.toString().match("[0-9]+")  ) {
+     displayValue
+  } else if (displayValue.length >=15 && displayValue.toString().indexOf(".") == -1 ) {
+    display.classList.add("smaller");
+  } else {
+    
+    console.log(displayValue)
+ displayValue = roundUp(displayValue);}
   display.textContent = displayValue;
-}
+  }
 
 function roundUp(number) {
-  return (number =
-    Math.round((parseFloat(number) + Number.EPSILON) * 10000000) / 10000000);
+  return number =
+    (Math.round((parseFloat(number) + Number.EPSILON) * 10000000) / 10000000).toString();
 }
 
 function changeDisplay(number) {
   if (displayValue == 0) {
     displayValue = number;
-  } else if (displayValue.length >= 14) {
+  } 
+  else if (displayValue.length >= 21) {
     return;
-  } else {
+  } 
+  else {
     displayValue = displayValue + `${number}`;
   }
   updateDisplayTexcontent();
@@ -109,26 +119,46 @@ window.addEventListener("keydown", function (e) {
     changeDisplay(`${e.key}`);
   } else if (`${e.keyCode}` == 67) {
     displayValue = 0;
+    display.classList.remove("smaller")
     updateDisplayTexcontent();
   } else if (`${e.keyCode}` == 8) {
     doBackspace();
+  } else if (`${e.keyCode}` == 190){
+    makeDecimal()
+  }else if(`${e.key}` == "+"){
+    calculate("+")
+  } else if (`${e.key}` == "-"){
+    calculate("-")
+  }else if (`${e.key}` == "/"){
+    calculate("/")
+  }else if (`${e.key}` == "*"){
+    calculate("*")
+  }else if (`${e.key}` == "="){
+    itEquals()
   }
 });
 
 backspace.addEventListener("click", doBackspace);
 function doBackspace() {
-  console.log(typeof displayValue);
   displayValue = displayValue.toString();
   displayValueArray = Array.from(displayValue);
   console.log(displayValueArray);
+  if (displayValue.length<= 15){
+    display.classList.remove("smaller")
+  }
   if (displayValueArray.length <= 1) {
     displayValue = 0;
   } else {
     displayValueArray.pop();
     displayValue = "";
     for (i = 0; i < displayValueArray.length; i++) {
-      displayValue = displayValue + parseInt(displayValueArray[i]);
+      if (displayValue.toString().indexOf(".") == -1){
+        displayValue = displayValue + displayValueArray[i]
+        console.log("dupa")
+      } else {
+      displayValue = displayValue + parseFloat(displayValueArray[i]);
     }
+  }
   }
   updateDisplayTexcontent();
 }
@@ -148,6 +178,7 @@ by.addEventListener("click", function (e) {
 
 let operator = undefined;
 
+
 function calculate(sign) {
   if (operator !== undefined) {
     itEquals();
@@ -165,9 +196,9 @@ function itEquals() {
     return;
   } else {
     displayValue = `${operate(
-      parseInt(first),
+      parseFloat(first),
       operator,
-      parseInt(displayValue)
+      parseFloat(displayValue)
     )}`;
     updateDisplayTexcontent();
     first = undefined;
@@ -175,4 +206,18 @@ function itEquals() {
   }
 }
 
-decimals.addEventListener("click", function (e) {});
+decimals.addEventListener("click", function (e) {
+makeDecimal()
+});
+function makeDecimal(){
+displayValueString = displayValue.toString()
+  if (displayValue.toString().indexOf(".") !== -1){
+    return 
+  }else{
+    displayValue = displayValue + "." 
+    display.textContent = displayValue;
+  }
+}
+
+
+// add a smaller class for when there is more than 14 digits so that the display contains 21 digits

@@ -12,7 +12,6 @@ body {
     justify-content: center;
     align-self: center;
     background-color: #f6d55c;
-    display: flex;
     flex-direction: column;
     margin-top: 30px;
     border: 3px solid #3caea3;
@@ -39,6 +38,9 @@ body {
     font-size: 38px;
     text-align: end;
 
+}
+.smaller {
+    font-size: 28px;
 }
 .numbers {
     font-size: 30px;
