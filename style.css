@@ -1,36 +1,104 @@
 body {
+    color: white;
     display: flex;
+    background-color: #20639B;
     flex-direction: column;
     align-items: center;
-    font-size:15px;
+    font-size:30px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 .calculator {
     display: flex;
+    justify-content: center;
+    align-self: center;
+    background-color: #f6d55c;
+    display: flex;
     flex-direction: column;
-    margin: 10px;
-    border: 1px solid gray;
-    padding: 10px;
-    height:200px;
-    width: 150px;
+    margin-top: 30px;
+    border: 3px solid #3caea3;
+    border-radius: 15px;
+    padding: 15px;
+    height:535px;
+    width: 375px;
     align-items: center;
 
 }
-.display {
-    width: 140px;
-    margin-bottom: 5px;
-    border: 1px solid gray;
+.display-box{
+    width: 330px;
+    height: 55px;
+    margin: 15px;
+    background-color: #3caea3;
+    border-radius: 8px;
     padding: 5px;
+    padding-top: 12px;
+    padding-bottom: 2px;
+    box-shadow: inset 0px 3px 0 rgba(0, 0, 0, 0.3);
+}
+.display {
+    width: 320px;
+    font-size: 38px;
+    text-align: end;
 
 }
+.numbers {
+    font-size: 30px;
+    border-radius: 8px;
+    height: 70px;
+    width: 70px;
+    color:white;
+    background-color: #f4a261;
+    box-shadow: 0 5px 0 #b67a49;
+    outline: none;
+    border: none;
+}
+.numbers:hover {
+    background-color: #f7ac6f;
+}
+.numbers:active {
+    background-color: #b67a49;
+    transform: translateY(4px);
+    box-shadow: 0 1px 0 #af7546;
+}
+
+.icon{
+    height: 32px;
+    width: 32px;
+    margin-left: 11px;  
+    background-image: url(backspace.svg);
+    background-repeat: no-repeat;
+}
+.buttons{
+    border: none;
+    outline: none;
+    font-size: 30px;
+    border-radius: 8px;
+    color: white;
+    background-color: #e76f51;
+    height: 70px;
+    width: 70px;
+    box-shadow: 0 5px 0 #b95a42;
+}
+
+.buttons:hover {
+    background-color: #e77a5f;
+}
+.buttons:active {
+    background-color: #b95a42;
+    transform: translateY(4px);
+    box-shadow: 0 1px 0 #b1553e;
+}
 .middle {
-    display: flex;
-    flex-direction: row;
+    
+    margin: 10px;
+    display: grid;
+    justify-content: space-evenly;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    gap: 12px 12px;    
+    
 }
-.num-keyboard {
-    display: flex;
-    flex-direction: column ;
-}
-.functions {
-    display: flex;
-    flex-direction: column;
+ #equal {
+    width: 152px;
+    grid-column-start: 2 ;
+    grid-column-end: 4 ;
 }
