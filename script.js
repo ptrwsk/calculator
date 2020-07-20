@@ -81,6 +81,8 @@ zero.addEventListener("click", function (e) {
 });
 
 clear.addEventListener("click", function (e) {
+  operator = undefined
+  first = undefined
   displayValue = 0;
   display.classList.remove("smaller")
   updateDisplayTexcontent();
@@ -88,9 +90,13 @@ clear.addEventListener("click", function (e) {
 function updateDisplayTexcontent() {
   if(displayValue.toString().match("[a-zA-Z]+") || !displayValue.toString().match("[0-9]+")  ) {
      displayValue
-  } else if (displayValue.length >=15 && displayValue.toString().indexOf(".") == -1 ) {
+  } else if (displayValue.length >=15 
+   //&& displayValue.toString().indexOf(".") == -1 
+    ) {
     display.classList.add("smaller");
-  } else {
+  // } else if (displayValue.length <=14 && displayValue.length !== undefined){
+  //   display.classList.remove("smaller")
+  }else{
     
     console.log(displayValue)
  displayValue = roundUp(displayValue);}
@@ -118,6 +124,8 @@ window.addEventListener("keydown", function (e) {
   if (`${e.keyCode}` >= 28 && `${e.keyCode}` <= 57) {
     changeDisplay(`${e.key}`);
   } else if (`${e.keyCode}` == 67) {
+    operator = undefined
+  first = undefined
     displayValue = 0;
     display.classList.remove("smaller")
     updateDisplayTexcontent();
@@ -142,8 +150,16 @@ backspace.addEventListener("click", doBackspace);
 function doBackspace() {
   displayValue = displayValue.toString();
   displayValueArray = Array.from(displayValue);
-  console.log(displayValueArray);
-  if (displayValue.length<= 15){
+  console.log(displayValueArray, displayValue, typeof displayValue)
+  if(displayValueArray.toString() == "0" ){
+    console.log("cos")
+    displayValue = 0;
+    operator = undefined;
+    first = undefined;
+    display.classList.remove("smaller")
+    updateDisplayTexcontent();
+  }
+  if (displayValue.length<= 15 && displayValue.length !==undefined){
     display.classList.remove("smaller")
   }
   if (displayValueArray.length <= 1) {
@@ -154,7 +170,6 @@ function doBackspace() {
     for (i = 0; i < displayValueArray.length; i++) {
       if (displayValue.toString().indexOf(".") == -1){
         displayValue = displayValue + displayValueArray[i]
-        console.log("dupa")
       } else {
       displayValue = displayValue + parseFloat(displayValueArray[i]);
     }
@@ -210,7 +225,6 @@ decimals.addEventListener("click", function (e) {
 makeDecimal()
 });
 function makeDecimal(){
-displayValueString = displayValue.toString()
   if (displayValue.toString().indexOf(".") !== -1){
     return 
   }else{
@@ -219,5 +233,3 @@ displayValueString = displayValue.toString()
   }
 }
 
-
-// add a smaller class for when there is more than 14 digits so that the display contains 21 digits
