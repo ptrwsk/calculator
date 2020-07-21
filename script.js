@@ -9,7 +9,7 @@ function multiply(first, second) {
 }
 function divide(first, second) {
   if (second == 0) {
-    return "Can't devide by 0";
+    return "Can't divide by 0";
   } else {
     return first / second;
   }
@@ -94,11 +94,11 @@ function updateDisplayTexcontent() {
    //&& displayValue.toString().indexOf(".") == -1 
     ) {
     display.classList.add("smaller");
+    displayValue = roundUp(displayValue);
   // } else if (displayValue.length <=14 && displayValue.length !== undefined){
   //   display.classList.remove("smaller")
   }else{
     
-    console.log(displayValue)
  displayValue = roundUp(displayValue);}
   display.textContent = displayValue;
   }
@@ -109,7 +109,7 @@ function roundUp(number) {
 }
 
 function changeDisplay(number) {
-  if (displayValue == 0) {
+  if (displayValue == 0 && displayValue.toString().indexOf(".") == -1) {
     displayValue = number;
   } 
   else if (displayValue.length >= 21) {
@@ -150,9 +150,7 @@ backspace.addEventListener("click", doBackspace);
 function doBackspace() {
   displayValue = displayValue.toString();
   displayValueArray = Array.from(displayValue);
-  console.log(displayValueArray, displayValue, typeof displayValue)
   if(displayValueArray.toString() == "0" ){
-    console.log("cos")
     displayValue = 0;
     operator = undefined;
     first = undefined;
