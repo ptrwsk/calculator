@@ -94,7 +94,9 @@ function updateDisplayTexcontent() {
    //&& displayValue.toString().indexOf(".") == -1 
     ) {
     display.classList.add("smaller");
+    if(displayValue.toString().indexOf(".") !== -1 ){
     displayValue = roundUp(displayValue);
+  console.log("dupsko")}
   // } else if (displayValue.length <=14 && displayValue.length !== undefined){
   //   display.classList.remove("smaller")
   }else{
@@ -105,14 +107,15 @@ function updateDisplayTexcontent() {
 
 function roundUp(number) {
   return number =
-    (Math.round((parseFloat(number) + Number.EPSILON) * 10000000) / 10000000).toString();
+    (Math.round((parseFloat(number) +  Number.EPSILON
+    ) * 10000000) / 10000000).toString();
 }
 
 function changeDisplay(number) {
   if (displayValue == 0 && displayValue.toString().indexOf(".") == -1) {
     displayValue = number;
   } 
-  else if (displayValue.length >= 21) {
+  else if (displayValue.length >= 13) {
     return;
   } 
   else {
@@ -190,10 +193,11 @@ by.addEventListener("click", function (e) {
 });
 
 let operator = undefined;
+let first = undefined
 
 
 function calculate(sign) {
-  if (operator !== undefined) {
+  if (operator !== undefined)  {
     itEquals();
   }
   first = displayValue;
